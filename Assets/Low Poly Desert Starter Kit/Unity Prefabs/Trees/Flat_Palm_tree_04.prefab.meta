@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: bb8427de3c81a9d4f8d6ba4eac883b0c
+labels:
+- Trees
+- Mobile
+- Lowpoly
+- Vertexcolor
+- Desert
+- Plant
+- 3dModel
+- Prefab
+timeCreated: 1464187606
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64344
+  packageName: Lowpoly Desert - Starter Kit
+  packageVersion: 1.1
+  assetPath: Assets/Low Poly Desert Starter Kit/Unity Prefabs/Trees/Flat_Palm_tree_04.prefab
+  uploadId: 734913

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 4d1256b72c374864abedd00cffbf248a
+labels:
+- Desert
+- Vertexcolor
+- Lowpoly
+- Props
+- Mobile
+- 3dModel
+- Prefab
+timeCreated: 1464131149
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64344
+  packageName: Lowpoly Desert - Starter Kit
+  packageVersion: 1.1
+  assetPath: Assets/Low Poly Desert Starter Kit/Unity Prefabs/Props/Flat_Box_01.prefab
+  uploadId: 734913

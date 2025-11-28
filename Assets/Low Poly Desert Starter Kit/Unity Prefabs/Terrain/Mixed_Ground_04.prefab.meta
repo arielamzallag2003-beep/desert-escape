@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: c70fcd5ff185b8548857688d4b2c5eef
+labels:
+- Tile
+- Ground
+- Terrain
+- Mobile
+- Lowpoly
+- Vertexcolor
+- Desert
+- 3dModel
+- Prefab
+timeCreated: 1464204474
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64344
+  packageName: Lowpoly Desert - Starter Kit
+  packageVersion: 1.1
+  assetPath: Assets/Low Poly Desert Starter Kit/Unity Prefabs/Terrain/Mixed_Ground_04.prefab
+  uploadId: 734913

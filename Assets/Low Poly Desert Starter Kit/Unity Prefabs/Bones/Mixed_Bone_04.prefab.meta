@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 10e49a17ec70d714eb4f6990d876e1fc
+labels:
+- Bone
+- Desert
+- Vertexcolor
+- Lowpoly
+- Props
+- Mobile
+- 3dModel
+- Prefab
+timeCreated: 1464131006
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64344
+  packageName: Lowpoly Desert - Starter Kit
+  packageVersion: 1.1
+  assetPath: Assets/Low Poly Desert Starter Kit/Unity Prefabs/Bones/Mixed_Bone_04.prefab
+  uploadId: 734913

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 1a88601ea5041684ab25345127f55890
+labels:
+- Desert
+- Vertexcolor
+- Lowpoly
+- Props
+- Mobile
+- 3dModel
+- Prefab
+timeCreated: 1464131141
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64344
+  packageName: Lowpoly Desert - Starter Kit
+  packageVersion: 1.1
+  assetPath: Assets/Low Poly Desert Starter Kit/Unity Prefabs/Props/Flat_Bowl_01.prefab
+  uploadId: 734913

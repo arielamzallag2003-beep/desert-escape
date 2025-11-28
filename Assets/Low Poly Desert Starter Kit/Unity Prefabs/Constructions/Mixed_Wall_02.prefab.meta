@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 29e4ede203d72b54c9c4bd56eb8215aa
+labels:
+- Desert
+- Lowpoly
+- Vertexcolor
+- Constructions
+- Mobile
+- Props
+timeCreated: 1464189039
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64344
+  packageName: Lowpoly Desert - Starter Kit
+  packageVersion: 1.1
+  assetPath: Assets/Low Poly Desert Starter Kit/Unity Prefabs/Constructions/Mixed_Wall_02.prefab
+  uploadId: 734913

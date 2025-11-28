@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 064045e2a4f819f48b44a94c24fc92c4
+labels:
+- Desert
+- Vertexcolor
+- Lowpoly
+- Props
+- Mobile
+- 3dModel
+- Prefab
+timeCreated: 1464295615
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64344
+  packageName: Lowpoly Desert - Starter Kit
+  packageVersion: 1.1
+  assetPath: Assets/Low Poly Desert Starter Kit/Unity Prefabs/Props/Flat_Sign_02.prefab
+  uploadId: 734913

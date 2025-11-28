@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7231be7dad90a2d45a75ae5f7e4d7991
+labels:
+- Desert
+- Cactus
+- Vertexcolor
+- Lowpoly
+- 3dModel
+- Prefab
+timeCreated: 1464187286
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64344
+  packageName: Lowpoly Desert - Starter Kit
+  packageVersion: 1.1
+  assetPath: Assets/Low Poly Desert Starter Kit/Unity Prefabs/Plants/Flat_Cactus_05.prefab
+  uploadId: 734913

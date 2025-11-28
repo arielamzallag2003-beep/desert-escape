@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 5258894d0c763fa4c80672f7130b6e0c
+labels:
+- Desert
+- Lowpoly
+- Vertexcolor
+- Constructions
+- Mobile
+- Props
+timeCreated: 1464189049
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64344
+  packageName: Lowpoly Desert - Starter Kit
+  packageVersion: 1.1
+  assetPath: Assets/Low Poly Desert Starter Kit/Unity Prefabs/Constructions/Flat_Wall_01.prefab
+  uploadId: 734913

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 76dde67353a375242bc4b63495c6d0b9
+labels:
+- Desert
+- Lowpoly
+- Vertexcolor
+- Constructions
+- Mobile
+- Props
+timeCreated: 1464188088
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64344
+  packageName: Lowpoly Desert - Starter Kit
+  packageVersion: 1.1
+  assetPath: Assets/Low Poly Desert Starter Kit/Unity Prefabs/Constructions/Mixed_Tent_01.prefab
+  uploadId: 734913

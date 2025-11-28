@@ -1,0 +1,3 @@
+repository "Desert Escape/Desert Escape@9070999766136@cloud"
+  path "/"
+    smartbranch "/main"

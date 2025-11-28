@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 89b8e242dd920454c8d8de6b37ea8705
+labels:
+- Desert
+- Vertexcolor
+- Lowpoly
+- Rock
+- Mobile
+- 3dModel
+- Prefab
+timeCreated: 1464187878
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 64344
+  packageName: Lowpoly Desert - Starter Kit
+  packageVersion: 1.1
+  assetPath: Assets/Low Poly Desert Starter Kit/Unity Prefabs/Rocks/Mixed_Rock_04.prefab
+  uploadId: 734913
