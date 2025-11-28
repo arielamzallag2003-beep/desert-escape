@@ -1,0 +1,881 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desert Duo: Puzzle Concepts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #2c1810 0%, #4a3728 100%);
+            font-family: 'Georgia', serif;
+            color: #f4e4c1;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #d4af37;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 60px;
+            color: #c9a961;
+            font-style: italic;
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .puzzle-card {
+            background: rgba(62, 47, 35, 0.8);
+            border: 3px solid #8b6f47;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .puzzle-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 15px;
+        }
+
+        .puzzle-icon {
+            font-size: 1.5em;
+            width: 50px;
+            height: 50px;
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #d4af37;
+        }
+
+        .puzzle-title {
+            font-size: 1.8em;
+            color: #d4af37;
+        }
+
+        .puzzle-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .meta-tag {
+            background: rgba(212, 175, 55, 0.2);
+            padding: 5px 12px;
+            border-radius: 5px;
+            border: 1px solid #d4af37;
+        }
+
+        .visualization {
+            background: 
+                linear-gradient(90deg, rgba(139, 111, 71, 0.1) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(139, 111, 71, 0.1) 1px, transparent 1px),
+                rgba(244, 228, 193, 0.05);
+            background-size: 20px 20px, 20px 20px, 100% 100%;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            min-height: 300px;
+            position: relative;
+            border: 2px solid #8b6f47;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.2);
+        }
+
+        .visualization::before {
+            content: 'TECHNICAL DIAGRAM';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 0.7em;
+            color: rgba(212, 175, 55, 0.4);
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        /* Puzzle 1: Sabliers */
+        .hourglass-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 300px;
+            position: relative;
+        }
+
+        .hourglass {
+            position: relative;
+            width: 80px;
+            height: 150px;
+        }
+
+        .hourglass::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 8px;
+            background: linear-gradient(90deg, #5d4a37 0%, #8b6f47 50%, #5d4a37 100%);
+            border-radius: 4px;
+            top: -5px;
+            left: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .hourglass::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 8px;
+            background: linear-gradient(90deg, #5d4a37 0%, #8b6f47 50%, #5d4a37 100%);
+            border-radius: 4px;
+            bottom: -5px;
+            left: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .hourglass-top, .hourglass-bottom {
+            width: 80px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(139, 111, 71, 0.4) 0%, rgba(93, 74, 55, 0.6) 100%);
+            position: absolute;
+            clip-path: polygon(20% 0%, 80% 0%, 50% 100%);
+            border: 2px solid #d4af37;
+            backdrop-filter: blur(2px);
+        }
+
+        .hourglass-bottom {
+            bottom: 0;
+            clip-path: polygon(50% 0%, 20% 100%, 80% 100%);
+        }
+
+        .hourglass-sand {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #f4a460;
+            border-radius: 50%;
+            bottom: 10px;
+            left: 20px;
+            animation: sandFlow 3s ease-in-out infinite;
+        }
+
+        .player-icon {
+            width: 70px;
+            height: 120px;
+            background: linear-gradient(180deg, #4a90e2 0%, #2c5aa0 100%);
+            border-radius: 15px 15px 8px 8px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 10px;
+            border: 3px solid #1a4070;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+
+        .player-icon::before {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #6ab0ff 0%, #4a90e2 100%);
+            border-radius: 50%;
+            border: 2px solid #1a4070;
+            margin-bottom: 5px;
+        }
+
+        .player-icon::after {
+            content: 'P';
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            position: absolute;
+            bottom: 15px;
+        }
+
+        .player1::after { content: 'P1'; }
+        .player2::after { content: 'P2'; }
+
+        .player1 { margin-right: -40px; }
+        .player2 { margin-left: -40px; }
+
+        .sync-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                #d4af37,
+                #d4af37 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        /* Puzzle 2: Glyphes de Feu */
+        .torch-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .torch {
+            width: 80px;
+            height: 140px;
+            background: linear-gradient(180deg, #2c1810 0%, #4a3728 100%);
+            border-radius: 5px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 10px;
+            border: 2px solid #8b6f47;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .torch::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 90%;
+            height: 60%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(139, 111, 71, 0.3) 2px,
+                rgba(139, 111, 71, 0.3) 4px
+            );
+            border-radius: 5px;
+        }
+
+        .flame {
+            width: 40px;
+            height: 55px;
+            background: radial-gradient(circle at 50% 60%, #ff6b00 0%, #ff4500 40%, #ff8c00 70%, rgba(255, 140, 0, 0) 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 0.8s ease-in-out infinite;
+            box-shadow: 0 0 25px rgba(255, 107, 0, 0.9), 0 0 40px rgba(255, 107, 0, 0.5);
+            position: relative;
+        }
+
+        .flame::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background: radial-gradient(circle, #ffeb3b 0%, #ff9800 60%, transparent 100%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: innerFlame 1.2s ease-in-out infinite;
+        }
+
+        .flame.off {
+            background: #3a3a3a;
+            animation: none;
+            box-shadow: none;
+        }
+
+        .flame.off::before {
+            display: none;
+        }
+
+        .sequence-number {
+            position: absolute;
+            bottom: 5px;
+            background: rgba(212, 175, 55, 0.3);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+            border: 1px solid #d4af37;
+        }
+
+        /* Puzzle 3: Balance */
+        .balance-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 300px;
+            position: relative;
+            padding-top: 40px;
+        }
+
+        .balance-beam {
+            width: 450px;
+            height: 20px;
+            background: linear-gradient(90deg, #8b6f47 0%, #a08060 50%, #8b6f47 100%);
+            border-radius: 10px;
+            position: relative;
+            margin-top: 80px;
+            transform: rotate(-5deg);
+            transition: transform 0.5s ease;
+            border: 3px solid #5d4a37;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 2px 5px rgba(255,255,255,0.2);
+        }
+
+        .balance-beam::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #d4af37 0%, #8b6f47 100%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid #5d4a37;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .balance-pivot {
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 70px solid #5d4a37;
+            position: absolute;
+            bottom: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+        }
+
+        .balance-pivot::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 15px;
+            background: linear-gradient(90deg, #3a2a1f 0%, #5d4a37 50%, #3a2a1f 100%);
+            border-radius: 8px;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+        }
+
+        .balance-plate {
+            width: 130px;
+            height: 20px;
+            background: linear-gradient(180deg, #c9a961 0%, #8b6f47 100%);
+            border-radius: 12px;
+            position: absolute;
+            top: -50px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 5px;
+            padding-bottom: 8px;
+            border: 3px solid #5d4a37;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 2px 5px rgba(255,255,255,0.2);
+        }
+
+        .balance-plate::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 40px;
+            background: repeating-linear-gradient(
+                0deg,
+                #5d4a37,
+                #5d4a37 3px,
+                #3a2a1f 3px,
+                #3a2a1f 6px
+            );
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .balance-plate::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #8b6f47 0%, #5d4a37 100%);
+            border-radius: 50%;
+            top: -44px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 2px solid #5d4a37;
+        }
+
+        .plate-left { left: 20px; }
+        .plate-right { right: 20px; }
+
+        .weight-object {
+            width: 35px;
+            height: 38px;
+            background: linear-gradient(135deg, #d4af37 0%, #8b6f47 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            font-weight: bold;
+            border: 2px solid #5d4a37;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.4), inset 0 -2px 3px rgba(0,0,0,0.3);
+            position: relative;
+            color: #2c1810;
+        }
+
+        .weight-object::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            height: 40%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+            border-radius: 3px;
+        }
+
+        /* Puzzle 4: Mécanisme Solaire */
+        .solar-mechanism {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 300px;
+            padding: 20px;
+        }
+
+        .disk {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #a08060 0%, #8b6f47 40%, #5d4a37 100%);
+            border: 6px solid #d4af37;
+            position: relative;
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.4), inset 0 5px 15px rgba(0,0,0,0.5);
+            animation: slowRotate 8s linear infinite;
+        }
+
+        .disk::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #5d4a37 0%, #3a2a1f 100%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid #8b6f47;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .disk::after {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 2px dashed rgba(212, 175, 55, 0.3);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .disk-symbol {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #d4af37 0%, #c9a961 100%);
+            border-radius: 8px;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            border: 3px solid #5d4a37;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,255,255,0.3);
+            color: #2c1810;
+        }
+
+        .disk:nth-child(2) {
+            animation-duration: 10s;
+            animation-direction: reverse;
+        }
+
+        .disk:nth-child(3) {
+            animation-duration: 12s;
+        }
+
+        .alignment-indicator {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 18px solid transparent;
+            border-right: 18px solid transparent;
+            border-top: 30px solid #d4af37;
+            filter: drop-shadow(0 3px 8px rgba(212, 175, 55, 0.6));
+        }
+
+        .alignment-indicator::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 15px;
+            background: #d4af37;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+
+        .mechanics-list {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #d4af37;
+        }
+
+        .mechanics-list li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .mechanics-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #d4af37;
+        }
+
+        @keyframes sandFlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes flicker {
+            0%, 100% { transform: scale(1) translateY(0); }
+            25% { transform: scale(1.05) translateY(-2px); }
+            50% { transform: scale(0.95) translateY(1px); }
+            75% { transform: scale(1.02) translateY(-1px); }
+        }
+
+        @keyframes innerFlame {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes slowRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .legend {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(62, 47, 35, 0.6);
+            border-radius: 15px;
+            border: 2px solid #8b6f47;
+        }
+
+        .legend-items {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            border: 2px solid #d4af37;
+        }
+
+        .dimension-label {
+            position: absolute;
+            font-size: 0.75em;
+            color: #d4af37;
+            background: rgba(44, 24, 16, 0.8);
+            padding: 2px 6px;
+            border-radius: 3px;
+            border: 1px solid #8b6f47;
+            white-space: nowrap;
+            font-family: 'Courier New', monospace;
+        }
+
+        .tech-annotation {
+            position: absolute;
+            font-size: 0.7em;
+            color: #c9a961;
+            font-style: italic;
+            max-width: 150px;
+            line-height: 1.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Desert Duo: Oasis Quest</h1>
+        <div class="subtitle">Conceptualisation Visuelle des Puzzles Coopératifs VR</div>
+
+        <div class="puzzle-grid">
+            <!-- PUZZLE 1 -->
+            <div class="puzzle-card">
+                <div class="puzzle-header">
+                    <div class="puzzle-icon">01</div>
+                    <div>
+                        <div class="puzzle-title">Le Sablier Mystique</div>
+                    </div>
+                </div>
+                <div class="puzzle-meta">
+                    <span class="meta-tag">Synchronisation</span>
+                    <span class="meta-tag">Difficulté: Simple</span>
+                    <span class="meta-tag">Type: Timer</span>
+                </div>
+                
+                <div class="visualization">
+                    <div class="hourglass-container">
+                        <div class="player-icon player1"></div>
+                        <div class="hourglass">
+                            <div class="hourglass-top"></div>
+                            <div class="hourglass-sand"></div>
+                            <div class="hourglass-bottom"></div>
+                        </div>
+                        <div class="sync-line"></div>
+                        <div class="hourglass">
+                            <div class="hourglass-top"></div>
+                            <div class="hourglass-sand"></div>
+                            <div class="hourglass-bottom"></div>
+                        </div>
+                        <div class="player-icon player2"></div>
+                    </div>
+                </div>
+
+                <ul class="mechanics-list">
+                    <li><strong>Grab</strong> le sablier avec la main</li>
+                    <li><strong>Rotate 180°</strong> pour déclencher le timer</li>
+                    <li>Les deux joueurs doivent retourner <strong>en même temps (±2s)</strong></li>
+                    <li>Si désynchronisé → Reset automatique</li>
+                    <li>Succès → Porte/coffre s'ouvre</li>
+                </ul>
+            </div>
+
+            <!-- PUZZLE 2 -->
+            <div class="puzzle-card">
+                <div class="puzzle-header">
+                    <div class="puzzle-icon">02</div>
+                    <div>
+                        <div class="puzzle-title">Les Glyphes de Feu</div>
+                    </div>
+                </div>
+                <div class="puzzle-meta">
+                    <span class="meta-tag">Type: Séquence</span>
+                    <span class="meta-tag">Difficulté: Simple</span>
+                    <span class="meta-tag">Méthode: Pattern</span>
+                </div>
+                
+                <div class="visualization">
+                    <div class="torch-grid">
+                        <div class="torch">
+                            <div class="flame"></div>
+                            <div class="sequence-number">1</div>
+                        </div>
+                        <div class="torch">
+                            <div class="flame off"></div>
+                            <div class="sequence-number">4</div>
+                        </div>
+                        <div class="torch">
+                            <div class="flame"></div>
+                            <div class="sequence-number">2</div>
+                        </div>
+                        <div class="torch">
+                            <div class="flame off"></div>
+                            <div class="sequence-number">6</div>
+                        </div>
+                        <div class="torch">
+                            <div class="flame"></div>
+                            <div class="sequence-number">3</div>
+                        </div>
+                        <div class="torch">
+                            <div class="flame off"></div>
+                            <div class="sequence-number">5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="mechanics-list">
+                    <li>6 torches murales disposées en grille</li>
+                    <li><strong>Prendre</strong> une torche allumée (3 disponibles)</li>
+                    <li><strong>Toucher</strong> les torches éteintes dans l'ordre (1→6)</li>
+                    <li>Pattern montré par <strong>lueurs/couleurs</strong> au début</li>
+                    <li>Erreur → Reset du pattern (torches s'éteignent)</li>
+                </ul>
+            </div>
+
+            <!-- PUZZLE 3 -->
+            <div class="puzzle-card">
+                <div class="puzzle-header">
+                    <div class="puzzle-icon">03</div>
+                    <div>
+                        <div class="puzzle-title">La Balance du Jugement</div>
+                    </div>
+                </div>
+                <div class="puzzle-meta">
+                    <span class="meta-tag">Type: Précision</span>
+                    <span class="meta-tag">Difficulté: Moyen</span>
+                    <span class="meta-tag">Méthode: Physique</span>
+                </div>
+                
+                <div class="visualization">
+                    <div class="balance-container">
+                        <div class="balance-beam">
+                            <div class="balance-pivot"></div>
+                            <div class="balance-plate plate-left">
+                                <div class="weight-object">3</div>
+                                <div class="weight-object">2</div>
+                            </div>
+                            <div class="balance-plate plate-right">
+                                <div class="weight-object">5</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="mechanics-list">
+                    <li>Balance avec 2 plateaux suspendus</li>
+                    <li>Collecter des <strong>poids antiques</strong> dans la zone (valeurs: 1, 2, 3, 5)</li>
+                    <li><strong>Placer</strong> les poids sur les plateaux (snap zones)</li>
+                    <li>Équilibrer à <strong>±10% de tolérance</strong></li>
+                    <li>Succès → Balance se verrouille, mécanisme s'active</li>
+                </ul>
+            </div>
+
+            <!-- PUZZLE 4 -->
+            <div class="puzzle-card">
+                <div class="puzzle-header">
+                    <div class="puzzle-icon">04</div>
+                    <div>
+                        <div class="puzzle-title">Le Mécanisme Solaire</div>
+                    </div>
+                </div>
+                <div class="puzzle-meta">
+                    <span class="meta-tag">Type: Rotation</span>
+                    <span class="meta-tag">Difficulté: Moyen</span>
+                    <span class="meta-tag">Méthode: Alignement</span>
+                </div>
+                
+                <div class="visualization">
+                    <div class="solar-mechanism">
+                        <div class="disk" style="position: relative;">
+                            <div class="alignment-indicator"></div>
+                            <div class="disk-symbol">I</div>
+                        </div>
+                        <div class="disk" style="position: relative;">
+                            <div class="alignment-indicator"></div>
+                            <div class="disk-symbol">II</div>
+                        </div>
+                        <div class="disk" style="position: relative;">
+                            <div class="alignment-indicator"></div>
+                            <div class="disk-symbol">III</div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="mechanics-list">
+                    <li>3 disques de pierre avec symboles gravés</li>
+                    <li><strong>Grab + Rotate</strong> chaque disque sur son axe</li>
+                    <li>Aligner les 3 symboles vers le <strong>haut (flèche dorée)</strong></li>
+                    <li>Rotation par <strong>incréments de 45°</strong> (snap angles)</li>
+                    <li>Son de "clic" quand aligné. Les 3 doivent être corrects simultanément</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="legend">
+            <h2 style="color: #d4af37; margin-bottom: 20px;">Légende Technique</h2>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #4a90e2;"></div>
+                    <span><strong>Joueur VR</strong> (hand tracking)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #d4af37;"></div>
+                    <span><strong>Objet interactif</strong> (grabbable)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ff6b00;"></div>
+                    <span><strong>Élément magique</strong> (effet visuel)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #8b6f47;"></div>
+                    <span><strong>Structure fixe</strong> (environnement)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
